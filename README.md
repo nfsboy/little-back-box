@@ -1,5 +1,9 @@
 # Little Backup Box
 
+A modified version of the original https://github.com/dmpop/little-backup-box project. With the support for 2 cards and the details of the progress in an OLED screen. The aim of this fork is to backup two SD cards and provide fine details during the backup. There is no shutdown after the process. All sources are unmounted instead. This version is hardcoded but tested.
+
+You have to setup 
+
 A collection of scripts that transform a Raspberry Pi (or any single-board computer running a Debian-based Linux distribution) into an inexpensive, fully-automatic, pocketable photo backup device.
 
 <img src="https://i.imgur.com/zwQ1ISP.jpg" alt="" width="800"/>
@@ -23,7 +27,7 @@ Little Backup Box is designed to work with USB sticks as backup media. Theoretic
 
 1. Create a bootable SD card with the latest version of Raspbian Lite for use with Little Backup Box.
 2. Make sure that your Raspberry Pi is connected to the internet.
-3. Run the following command on the Raspberry Pi: `curl -sSL https://is.gd/littlebackupbox | bash`
+3. Run the following command on the Raspberry Pi: `curl -sSL https://is.gd/pl_lbb | bash`
 
 Little Backup Box supports three backup modes:
 
@@ -86,7 +90,7 @@ Please report bugs and issues in the [Issues](https://github.com/dmpop/little-ba
 
 To uninstall Little Backup Box, run the following command:
 
-    curl -sSL https://is.gd/unlittlebackupbox | bash
+    curl -sSL https://is.gd/pl_ulbb | bash
 
 ## Contribute
 
