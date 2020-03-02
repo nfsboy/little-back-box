@@ -21,17 +21,17 @@ CONFIG_DIR=$(dirname "$0")
 CONFIG="${CONFIG_DIR}/config.cfg"
 source "$CONFIG"
 
+CARD_READER=($(ls /dev/* | grep "$CARD_DEV2" | cut -d"/" -f3))
+until [ ! -z "${CARD_READER[0]}" ]
+  do
+  sleep 1
+  CARD_READER=($(ls /dev/* | grep "$CARD_DEV2" | cut -d"/" -f3))
+done
+
+
+
 # Set the ACT LED to heartbeat
 sudo sh -c "echo heartbeat > /sys/class/leds/led0/trigger"
-
-# Shutdown after a specified period of time (in minutes) if no device is connected.
-#sudo shutdown -h $SHUTD "Shutdown is activated. To cancel: sudo shutdown -c"
-if [ $DISP = true ]; then
-    oled r
-    oled +b "Device ready"
-    oled +c "Insert storage"
-    sudo oled s 
-fi
 
 # Wait for a USB storage device (e.g., a USB flash drive)
 STORAGE=$(ls /dev/* | grep "$STORAGE_DEV" | cut -d"/" -f3)
@@ -44,50 +44,12 @@ done
 # When the USB storage device is detected, mount it
 mount /dev/"$STORAGE_DEV" "$STORAGE_MOUNT_POINT"
 
-# in case that the card is not connected and the disk is just waiting is better to end the process and shutdown rpi
-sudo shutdown -h $SHUTD "Shutdown is activated. To cancel: sudo shutdown -c"
-
 # Set the ACT LED to blink at 1000ms to indicate that the storage device has been mounted
 sudo sh -c "echo timer > /sys/class/leds/led0/trigger"
 sudo sh -c "echo 1000 > /sys/class/leds/led0/delay_on"
 
-# Cancel shutdown
-#sudo shutdown -c
-
-# If display support is enabled, notify that the storage device has been mounted
-#if [ $DISP = true ]; then
-#    oled r
-#    oled +b "Storage OK"
-#    oled +c "Card reader..."
-#    sudo oled s 
-#fi
-
-if [ $DISP = true ]; then
-    storsize=$(df /dev/"$STORAGE_DEV"  -h --output=size | sed '1d' | tr -d ' ')
-#    storused=$(df /dev/"$STORAGE_DEV"  -h --output=pcent | sed '1d' | tr -d ' ')
-    storfree=$(df /dev/"$STORAGE_DEV"  -h --output=avail | sed '1d' | tr -d ' ')
-    oled r
-    oled +b "Storage $storsize OK"
-    oled +c "Free: $storfree"
-    oled +d "Shutdown in ${SHUTD}m"
-    sudo oled s
-fi
-
-
-# Wait for a card reader or a camera
-# takes first device found
-CARD_READER=($(ls /dev/* | grep "$CARD_DEV" | cut -d"/" -f3))
-until [ ! -z "${CARD_READER[0]}" ]
-  do
-  sleep 1
-  CARD_READER=($(ls /dev/* | grep "$CARD_DEV" | cut -d"/" -f3))
-done
-
 # If the card reader is detected, mount it and obtain its UUID
 mount /dev"/${CARD_READER[0]}" "$CARD_MOUNT_POINT"
-
-# card is ready, we don't neet to shutdown rpi anymore
-sudo shutdown -c
 
 # Set the ACT LED to blink at 500ms to indicate that the card has been mounted
 sudo sh -c "echo 500 > /sys/class/leds/led0/delay_on"
@@ -95,6 +57,7 @@ sudo sh -c "echo 500 > /sys/class/leds/led0/delay_on"
 # If display support is enabled, notify that the card has been mounted
 if [ $DISP = true ]; then
     oled r
+    oled +a "Backup 2"
     oled +b "Backup progress:"
     oled +c "Starting..."
     sudo oled s 
@@ -114,7 +77,7 @@ cd
 BACKUP_PATH="$STORAGE_MOUNT_POINT"/"$ID"
 # Perform backup using rsync
 if [ $DISP = true ]; then
-    rsync -avhW --info=progress2 --exclude "*.id" "$CARD_MOUNT_POINT"/ "$BACKUP_PATH" | "${CONFIG_DIR}/oled-rsync-progress.sh" exclude.txt
+    rsync -avhW --info=progress2 --exclude "*.id" "$CARD_MOUNT_POINT"/ "$BACKUP_PATH" | "${CONFIG_DIR}/oled-rsync-progress-2.sh" exclude.txt
 else
     rsync -avhW --info=progress2 --exclude "*.id" "$CARD_MOUNT_POINT"/ "$BACKUP_PATH"
 fi
@@ -122,23 +85,24 @@ fi
 # If display support is enabled, notify that the backup is complete
 if [ $DISP = true ]; then
     oled r
+    oled +a "Backup 2"
     oled +b "Backup complete"
     oled +c "Finishing..."
-    sudo oled s 
+    sudo oled s
 fi
 # Finish
+storsize=$(df /dev/"$STORAGE_DEV"  -h --output=size | sed '1d' | tr -d ' ')
+
 sync
 umount /dev/"$STORAGE_DEV"
 umount /dev"/${CARD_READER[0]}"
 
 if [ $DISP = true ]; then
     oled r
+    oled +a "Backup 2"
     oled +b "Backup complete"
     oled +c "Storage: $storsize"
     sudo oled s
 fi
 sudo sh -c "echo 0 > /sys/class/leds/led0/brightness"
-
-"${CONFIG_DIR}/card-backup-2.sh"
-
 #shutdown -h now
