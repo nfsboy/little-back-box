@@ -1,6 +1,15 @@
 # Little Backup Box
 
-A modified version of the original https://github.com/dmpop/little-backup-box project. With the support for 2 cards and the details of the progress in an OLED screen. The aim of this fork is to backup two SD cards and provide fine details during the backup. There is no shutdown after the process. All sources are unmounted instead. This version is hardcoded but tested.
+A modified version of the original https://github.com/dmpop/little-backup-box project. With the support for more cards and the details of the progress in an OLED screen. The aim of this fork is to backup more SD cards and provide fine details during the backup. There is no shutdown after the process. All sources are unmounted instead. This version is hardcoded but tested.
+All mount points for the cards are in config.cfg as
+- CARD_MOUNT_POINT="/media/card" # Mount point of the storage card
+- CARD_DEV="sdb1" # Name of the storage card
+- CARD_DEV2="sdc1"
+- CARD_DEV3="sdd1"
+- CARD_DEV4="sde1"
+
+of course, you can add more cards
+
 
 You have to setup 
 

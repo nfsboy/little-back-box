@@ -114,7 +114,7 @@ cd
 BACKUP_PATH="$STORAGE_MOUNT_POINT"/"$ID"
 # Perform backup using rsync
 if [ $DISP = true ]; then
-    rsync -avhW --info=progress2 --exclude "*.id" "$CARD_MOUNT_POINT"/ "$BACKUP_PATH" | "${CONFIG_DIR}/oled-rsync-progress.sh" exclude.txt
+    rsync -avhW --info=progress2 --exclude "*.id" "$CARD_MOUNT_POINT"/ "$BACKUP_PATH" | "${CONFIG_DIR}/oled-rsync-progress.sh" exclude.txt 1
 else
     rsync -avhW --info=progress2 --exclude "*.id" "$CARD_MOUNT_POINT"/ "$BACKUP_PATH"
 fi
@@ -139,6 +139,6 @@ if [ $DISP = true ]; then
 fi
 sudo sh -c "echo 0 > /sys/class/leds/led0/brightness"
 
-"${CONFIG_DIR}/card-backup-2.sh"
+"${CONFIG_DIR}/card-backup-next.sh" 2
 
 #shutdown -h now

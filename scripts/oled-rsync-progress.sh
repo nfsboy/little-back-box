@@ -4,9 +4,10 @@
 filename=
 
 [[ $1 ]] || {
-  echo "Usage: rsync -P --exclude=exclude-file ... | $0 exclude-file" >&2
+  echo "Usage: rsync -P --exclude=exclude-file ... | $0 exclude-file $2" >&2
   exit 1
 }
+
 
 CONFIG_DIR=$(dirname "$0")
 CONFIG="${CONFIG_DIR}/config.cfg"
@@ -26,6 +27,7 @@ while IFS=$'\n' read -r -d $'\r' -a pieces; do
 	dif=$(($cTimestamp - $timestamp))
         if [ $dif -gt 0 ]; then
             oled r
+	    oled +a "Backup $2" 
             oled +b "Backup progress:"
             oled +c "$pct - $rate"
             oled +d "Storage: $storsize"

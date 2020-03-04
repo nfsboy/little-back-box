@@ -21,11 +21,26 @@ CONFIG_DIR=$(dirname "$0")
 CONFIG="${CONFIG_DIR}/config.cfg"
 source "$CONFIG"
 
-CARD_READER=($(ls /dev/* | grep "$CARD_DEV2" | cut -d"/" -f3))
+iteration="$1"
+
+CARD_POINT="CARD_DEV${iteration}"
+CARD=${!CARD_POINT}
+echo "next point for backup is $CARD"
+
+# if var is empty, exit
+if [ -z "$CARD" ]
+then
+    sudo sh -c "echo 0 > /sys/class/leds/led0/brightness"
+    echo "No setup for $CARD_POINT in $CONFIG"
+    exit 0
+fi
+
+
+CARD_READER=($(ls /dev/* | grep "$CARD" | cut -d"/" -f3))
 until [ ! -z "${CARD_READER[0]}" ]
   do
   sleep 1
-  CARD_READER=($(ls /dev/* | grep "$CARD_DEV2" | cut -d"/" -f3))
+  CARD_READER=($(ls /dev/* | grep "$CARD" | cut -d"/" -f3))
 done
 
 
@@ -57,7 +72,7 @@ sudo sh -c "echo 500 > /sys/class/leds/led0/delay_on"
 # If display support is enabled, notify that the card has been mounted
 if [ $DISP = true ]; then
     oled r
-    oled +a "Backup 2"
+    oled +a "Backup $iteration"
     oled +b "Backup progress:"
     oled +c "Starting..."
     sudo oled s 
@@ -77,7 +92,7 @@ cd
 BACKUP_PATH="$STORAGE_MOUNT_POINT"/"$ID"
 # Perform backup using rsync
 if [ $DISP = true ]; then
-    rsync -avhW --info=progress2 --exclude "*.id" "$CARD_MOUNT_POINT"/ "$BACKUP_PATH" | "${CONFIG_DIR}/oled-rsync-progress-2.sh" exclude.txt
+    rsync -avhW --info=progress2 --exclude "*.id" "$CARD_MOUNT_POINT"/ "$BACKUP_PATH" | "${CONFIG_DIR}/oled-rsync-progress.sh" exclude.txt $iteration
 else
     rsync -avhW --info=progress2 --exclude "*.id" "$CARD_MOUNT_POINT"/ "$BACKUP_PATH"
 fi
@@ -85,7 +100,7 @@ fi
 # If display support is enabled, notify that the backup is complete
 if [ $DISP = true ]; then
     oled r
-    oled +a "Backup 2"
+    oled +a "Backup $iteration"
     oled +b "Backup complete"
     oled +c "Finishing..."
     sudo oled s
@@ -99,10 +114,15 @@ umount /dev"/${CARD_READER[0]}"
 
 if [ $DISP = true ]; then
     oled r
-    oled +a "Backup 2"
+    oled +a "Backup $iteration"
     oled +b "Backup complete"
     oled +c "Storage: $storsize"
     sudo oled s
 fi
 sudo sh -c "echo 0 > /sys/class/leds/led0/brightness"
-#shutdown -h now
+
+nextIteration="$(($iteration + 1))"
+
+echo "Next iteration number is $nextIteration"
+
+"${CONFIG_DIR}/card-backup-next.sh" $nextIteration
