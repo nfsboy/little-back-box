@@ -70,8 +70,10 @@ The remote control mode is enabled by default. This mode allows you to control a
 
 1. Boot the Raspberry Pi
 2. Plug in a backup storage device
-3. Insert a storage card into a card reader and plug it into the Raspberry Pi
-4. Wait till the Raspberry Pi shuts down
+3. Insert a storage card into a card reader and plug it into the Raspberry Pi. You can connect more cards in unison or separately, during the backup or after
+4. Wait till the end of the whole backup
+5. Unplug all devices
+6. Unplug the power cord
 
 **Note:** To differentiate between different storage cards, the backup script creates a datetime-based *.id* file in the root of each storage card. The name of the *.id* file is also used as the destination backup folder on the storage device.
 
