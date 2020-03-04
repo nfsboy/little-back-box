@@ -1,4 +1,4 @@
-# Little Backup Box
+# A fork of Little Backup Box
 
 A modified version of the original https://github.com/dmpop/little-backup-box project. With the support for more cards and the details of the progress in an OLED screen. The aim of this fork is to backup more SD cards and provide fine details during the backup. There is no shutdown after the process. All sources are unmounted instead. This version is hardcoded but tested.
 All mount points for the cards are in config.cfg as
@@ -10,8 +10,7 @@ All mount points for the cards are in config.cfg as
 
 of course, you can add more cards
 
-
-You have to setup 
+# Little Backup Box
 
 A collection of scripts that transform a Raspberry Pi (or any single-board computer running a Debian-based Linux distribution) into an inexpensive, fully-automatic, pocketable photo backup device.
 
