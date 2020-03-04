@@ -51,17 +51,6 @@ sudo shutdown -h $SHUTD "Shutdown is activated. To cancel: sudo shutdown -c"
 sudo sh -c "echo timer > /sys/class/leds/led0/trigger"
 sudo sh -c "echo 1000 > /sys/class/leds/led0/delay_on"
 
-# Cancel shutdown
-#sudo shutdown -c
-
-# If display support is enabled, notify that the storage device has been mounted
-#if [ $DISP = true ]; then
-#    oled r
-#    oled +b "Storage OK"
-#    oled +c "Card reader..."
-#    sudo oled s 
-#fi
-
 if [ $DISP = true ]; then
     storsize=$(df /dev/"$STORAGE_DEV"  -h --output=size | sed '1d' | tr -d ' ')
 #    storused=$(df /dev/"$STORAGE_DEV"  -h --output=pcent | sed '1d' | tr -d ' ')
@@ -73,72 +62,6 @@ if [ $DISP = true ]; then
     sudo oled s
 fi
 
-
-# Wait for a card reader or a camera
-# takes first device found
-CARD_READER=($(ls /dev/* | grep "$CARD_DEV" | cut -d"/" -f3))
-until [ ! -z "${CARD_READER[0]}" ]
-  do
-  sleep 1
-  CARD_READER=($(ls /dev/* | grep "$CARD_DEV" | cut -d"/" -f3))
-done
-
-# If the card reader is detected, mount it and obtain its UUID
-mount /dev"/${CARD_READER[0]}" "$CARD_MOUNT_POINT"
-
-# card is ready, we don't neet to shutdown rpi anymore
-sudo shutdown -c
-
-# Set the ACT LED to blink at 500ms to indicate that the card has been mounted
-sudo sh -c "echo 500 > /sys/class/leds/led0/delay_on"
-
-# If display support is enabled, notify that the card has been mounted
-if [ $DISP = true ]; then
-    oled r
-    oled +b "Backup progress:"
-    oled +c "Starting..."
-    sudo oled s 
-fi
-
-# Create  a .id random identifier file if doesn't exist
-cd "$CARD_MOUNT_POINT"
-if [ ! -f *.id ]; then
-    random=$(echo $RANDOM)
-    touch $(date -d "today" +"%Y%m%d%H%M")-$random.id
-fi
-ID_FILE=$(ls *.id)
-ID="${ID_FILE%.*}"
-cd
-
-# Set the backup path
-BACKUP_PATH="$STORAGE_MOUNT_POINT"/"$ID"
-# Perform backup using rsync
-if [ $DISP = true ]; then
-    rsync -avhW --info=progress2 --exclude "*.id" "$CARD_MOUNT_POINT"/ "$BACKUP_PATH" | "${CONFIG_DIR}/oled-rsync-progress.sh" exclude.txt 1
-else
-    rsync -avhW --info=progress2 --exclude "*.id" "$CARD_MOUNT_POINT"/ "$BACKUP_PATH"
-fi
-
-# If display support is enabled, notify that the backup is complete
-if [ $DISP = true ]; then
-    oled r
-    oled +b "Backup complete"
-    oled +c "Finishing..."
-    sudo oled s 
-fi
-# Finish
-sync
 umount /dev/"$STORAGE_DEV"
-umount /dev"/${CARD_READER[0]}"
 
-if [ $DISP = true ]; then
-    oled r
-    oled +b "Backup complete"
-    oled +c "Storage: $storsize"
-    sudo oled s
-fi
-sudo sh -c "echo 0 > /sys/class/leds/led0/brightness"
-
-"${CONFIG_DIR}/card-backup-next.sh" 2
-
-#shutdown -h now
+"${CONFIG_DIR}/card-backup-run.sh" 1

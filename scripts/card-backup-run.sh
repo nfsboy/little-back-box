@@ -43,7 +43,7 @@ until [ ! -z "${CARD_READER[0]}" ]
   CARD_READER=($(ls /dev/* | grep "$CARD" | cut -d"/" -f3))
 done
 
-
+sudo shutdown -c
 
 # Set the ACT LED to heartbeat
 sudo sh -c "echo heartbeat > /sys/class/leds/led0/trigger"
@@ -112,11 +112,13 @@ sync
 umount /dev/"$STORAGE_DEV"
 umount /dev"/${CARD_READER[0]}"
 
+sudo shutdown -h $SHUTD "Shutdown is activated. To cancel: sudo shutdown -c"
 if [ $DISP = true ]; then
     oled r
     oled +a "Backup $iteration"
     oled +b "Backup complete"
     oled +c "Storage: $storsize"
+    oled +d "Shutdown in ${SHUTD}m"
     sudo oled s
 fi
 sudo sh -c "echo 0 > /sys/class/leds/led0/brightness"
@@ -125,4 +127,4 @@ nextIteration="$(($iteration + 1))"
 
 echo "Next iteration number is $nextIteration"
 
-"${CONFIG_DIR}/card-backup-next.sh" $nextIteration
+"${CONFIG_DIR}/card-backup-run.sh" $nextIteration
