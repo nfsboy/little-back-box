@@ -1,9 +1,10 @@
 # A fork of Little Backup Box
 
-A modified version of the original https://github.com/dmpop/little-backup-box project. With the support for more cards and the details of the progress in an OLED screen. The aim of this fork is to backup more SD cards and provide fine details during the backup. There is no shutdown after the process. All sources are unmounted instead. This version is hardcoded but tested.
+A modified version of the original https://github.com/dmpop/little-backup-box project. With the support for more cards and the details of the progress in an OLED screen. The aim of this fork is to backup more SD cards and provide fine details during the backup. 
+
 All mount points for the cards are in config.cfg as
 - CARD_MOUNT_POINT="/media/card" # Mount point of the storage card
-- CARD_DEV="sdb1" # Name of the storage card
+- CARD_DEV1="sdb1" # Name of the storage card
 - CARD_DEV2="sdc1"
 - CARD_DEV3="sdd1"
 - CARD_DEV4="sde1"
@@ -70,9 +71,9 @@ The remote control mode is enabled by default. This mode allows you to control a
 
 1. Boot the Raspberry Pi
 2. Plug in a backup storage device
-3. Insert a storage card into a card reader and plug it into the Raspberry Pi. You can connect more cards in unison or separately, during the backup or after
+3. Insert a storage card into a card reader and plug it into the Raspberry Pi. You can connect more cards in unison or separately, during the backup or after it
 4. Wait till the end of the whole backup
-5. Unplug all devices
+5. Unplug all the devices
 6. Unplug the power cord
 
 **Note:** To differentiate between different storage cards, the backup script creates a datetime-based *.id* file in the root of each storage card. The name of the *.id* file is also used as the destination backup folder on the storage device.
