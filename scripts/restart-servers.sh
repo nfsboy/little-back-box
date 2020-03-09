@@ -38,8 +38,8 @@ sudo sh -c "echo 1000 > /sys/class/leds/led0/delay_on"
 
 # Reload minidlna
 
-#sudo minidlnad -R
-#sudo service minidlna restart
+sudo minidlnad -R
+sudo service minidlna restart
 
 # If display support is enabled, display storage space info
 #if [ $DISP = true ]; then
