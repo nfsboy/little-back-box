@@ -9,7 +9,9 @@ All mount points for the cards are in config.cfg as
 - CARD_DEV3="sdd1"
 - CARD_DEV4="sde1"
 
-of course, you can add more cards
+of course, you can add more cards.
+
+**Tested with IIC I2C OLED 0.91" Display 128x32 White 3,3 V 5V, Driver IC: SSD1306**
 
 # Little Backup Box
 
