@@ -112,7 +112,9 @@ sync
 umount /dev/"$STORAGE_DEV"
 umount /dev"/${CARD_READER[0]}"
 
-sudo shutdown -h $SHUTD "Shutdown is activated. To cancel: sudo shutdown -c"
+if [ $SHUTD_AFTER_BACKUP = true ]; then
+    sudo shutdown -h $SHUTD "Shutdown is activated. To cancel: sudo shutdown -c"
+fi
 if [ $DISP = true ]; then
     oled r
     oled +a "Backup $iteration"
