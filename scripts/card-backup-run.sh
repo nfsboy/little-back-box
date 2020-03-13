@@ -120,7 +120,9 @@ if [ $DISP = true ]; then
     oled +a "Backup $iteration"
     oled +b "Backup complete"
     oled +c "Storage: $storsize"
-    oled +d "Shutdown in ${SHUTD}m"
+    if [ $SHUTD_AFTER_BACKUP = true ]; then
+        oled +d "Shutdown in ${SHUTD}m"
+    fi
     sudo oled s
 fi
 sudo sh -c "echo 0 > /sys/class/leds/led0/brightness"
