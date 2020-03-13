@@ -11,6 +11,9 @@ All mount points for the cards are in config.cfg as
 
 of course, you can add more cards.
 
+
+<img src="img/little-backup-box.jpg" alt="" width="800"/>
+
 **Tested with OLED Display IIC I2C 0.91" 128x32, Driver IC: SSD1306**
 
 # Little Backup Box
