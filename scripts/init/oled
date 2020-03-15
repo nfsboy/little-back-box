@@ -19,9 +19,6 @@ DAEMON=/home/pi
 # pid file for the daemon
 PIDFILE=/var/run/oled.pid
 
-# If the daemon is not there, then exit.
-#test -x $DAEMON || exit 5
-
 case $1 in
  start)
   ;;
