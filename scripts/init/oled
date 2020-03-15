@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+#
+### BEGIN INIT INFO
+# Provides:          oled
+# Required-Start:    $remote_fs $local_fs
+# Required-Stop:     $remote_fs $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Oled cleaner
+# Description:       Clears oled during shutdown
+### END INIT INFO
+
+# Using the lsb functions to perform the operations.
+. /lib/lsb/init-functions
+# Process name ( For display )
+NAME=oled
+# Daemon name, where is the actual executable
+DAEMON=/home/pi
+# pid file for the daemon
+PIDFILE=/var/run/oled.pid
+
+# If the daemon is not there, then exit.
+#test -x $DAEMON || exit 5
+
+case $1 in
+ start)
+  ;;
+ stop)
+    oled r
+    oled +a "Device off"
+    sudo oled s
+  ;;
+ restart)
+  ;;
+ status)
+  ;;
+ reload)
+  ;;
+ *)
+  # For invalid arguments, print the usage message.
+  echo "Usage: $0 {start|stop|restart|reload|status}"
+  exit 2
+  ;;
+esac
