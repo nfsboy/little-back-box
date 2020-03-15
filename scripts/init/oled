@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#
+
 ### BEGIN INIT INFO
 # Provides:          oled
 # Required-Start:    $remote_fs $local_fs
@@ -10,14 +10,6 @@
 # Description:       Clears oled during shutdown
 ### END INIT INFO
 
-# Using the lsb functions to perform the operations.
-. /lib/lsb/init-functions
-# Process name ( For display )
-NAME=oled
-# Daemon name, where is the actual executable
-DAEMON=/home/pi
-# pid file for the daemon
-PIDFILE=/var/run/oled.pid
 
 case $1 in
  start)
