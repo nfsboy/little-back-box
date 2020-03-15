@@ -24,7 +24,6 @@ case $1 in
   ;;
  stop)
     oled r
-    oled +a "Device off"
     sudo oled s
   ;;
  restart)
