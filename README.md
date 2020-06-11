@@ -18,22 +18,22 @@ of course, you can add more cards.
 ## How does it work?
 
 - run the device and wait until it is ready, then insert the storage - you can plug in a card in a USB card reader or a powered USB hub with USB HDD or SSD
-<img src="img/01_ready.jpg" alt="" width="400"/>
+<img src="img/01_ready.jpg" alt="" width="800"/>
 
 - once the storage is connected you have one minute to insert a card for backup
-<img src="img/02_storage_connected.jpg" alt="" width="400"/>
+<img src="img/02_storage_connected.jpg" alt="" width="800"/>
 
 - then, the backup is ready to start
-<img src="img/03_backup_starting.jpg" alt="" width="400"/>
+<img src="img/03_backup_starting.jpg" alt="" width="800"/>
 
 - you can watch the progress during the backup
-<img src="img/04_backup_running.jpg" alt="" width="400"/>
+<img src="img/04_backup_running.jpg" alt="" width="800"/>
 
-- verification checks that there is no missing file
-<img src="img/05_backup_verified.jpg" alt="" width="400"/>
+- the verification checks that there is no missing file
+<img src="img/05_backup_verified.jpg" alt="" width="800"/>
 
 - you can plug in other cards anytime, during as well as after the backup, if there is something more to backup, the next backup starts
-<img src="img/06_next_backup.jpg" alt="" width="400"/>
+<img src="img/06_next_backup.jpg" alt="" width="800"/>
 
 **Tested with OLED Displays:**
 - IIC I2C 0.91" 128x32, Driver IC: SSD1306
