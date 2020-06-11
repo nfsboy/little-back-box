@@ -96,15 +96,32 @@ if [ $DISP = true ]; then
 else
     rsync -avhW --info=progress2 --exclude "*.id" "$CARD_MOUNT_POINT"/ "$BACKUP_PATH"
 fi
+if [ "$?" -eq "0" ]; then
+    STATUS="complete"
+else
+    STATUS="FAILED"
+fi
+
+# files verification
+diffcount=$(rsync -nai --delete "$CARD_MOUNT_POINT"/ "$BACKUP_PATH" | grep ">f" | grep -v ".id" | wc -l )
+
+echo "Different count number is $diffcount"
+
+if [ "$diffcount" -eq "0" ]; then
+    STATUS="verified"
+else
+    STATUS="FAILED $diffcount"
+fi
 
 # If display support is enabled, notify that the backup is complete
 if [ $DISP = true ]; then
     oled r
     oled +a "Backup $iteration"
-    oled +b "Backup complete"
+    oled +b "Backup $STATUS"
     oled +c "Finishing..."
     sudo oled s
 fi
+
 # Finish
 storsize=$(df /dev/"$STORAGE_DEV"  -h --output=size | sed '1d' | tr -d ' ')
 
@@ -118,10 +135,10 @@ fi
 if [ $DISP = true ]; then
     oled r
     oled +a "Backup $iteration"
-    oled +b "Backup complete"
+    oled +b "Backup $STATUS"
     oled +c "Storage: $storsize"
     if [ $SHUTD_AFTER_BACKUP = true ]; then
-        oled +d "Shutdown in ${SHUTD}m"
+	oled +d "Shutdown in ${SHUTD}m"
     fi
     sudo oled s
 fi
