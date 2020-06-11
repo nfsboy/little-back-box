@@ -35,8 +35,6 @@ of course, you can add more cards.
 - you can plug in other cards anytime, during as well as after the backup, if there is something more to backup, the next backup starts
 <img src="img/06_next_backup.jpg" alt="" width="400"/>
 
-<img src="img/little-backup-box.jpg" alt="" width="800"/>
-
 **Tested with OLED Displays:**
 - IIC I2C 0.91" 128x32, Driver IC: SSD1306
 - 1.3 inch oled IIC Serial White OLED Display Module 128X64 I2C SSD1306 12864 LCD Screen Board VDD GND SCK SDA for Arduino Black
