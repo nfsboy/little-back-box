@@ -1,5 +1,7 @@
 # A fork of Little Backup Box
 
+**Do you need to quickly and safely backup cards, usb sticks, disks and other data storages with a really small, portable and cheap device? Then you have found what are you looking for.**
+
 A modified version of the original https://github.com/dmpop/little-backup-box project. With the support for more cards and the details of the progress in an OLED screen. The aim of this fork is to backup more SD cards and provide fine details during the backup. 
 
 The backup is verified and in case there is a difference in the source and the target, the backup is displayed as failed.
