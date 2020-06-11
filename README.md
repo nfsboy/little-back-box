@@ -2,6 +2,8 @@
 
 A modified version of the original https://github.com/dmpop/little-backup-box project. With the support for more cards and the details of the progress in an OLED screen. The aim of this fork is to backup more SD cards and provide fine details during the backup. 
 
+The backup is verified and in case there is a difference in the source and the target, the backup is displayed as failed.
+
 All mount points for the cards are in config.cfg as
 - CARD_MOUNT_POINT="/media/card" # Mount point of the storage card
 - CARD_DEV1="sdb1" # Name of the storage card
