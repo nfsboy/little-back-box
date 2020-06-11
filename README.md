@@ -17,7 +17,7 @@ of course, you can add more cards.
 
 ## How does it work?
 
-- run the device and wait until it is ready, then insert the storage - you can plug in a card in USB card adapter or powered USB hub with USB HDD or SSD
+- run the device and wait until it is ready, then insert the storage - you can plug in a card in a USB card reader or a powered USB hub with USB HDD or SSD
 <img src="img/01_ready.jpg" alt="" width="400"/>
 
 - once the storage is connected you have one minute to insert a card for backup
