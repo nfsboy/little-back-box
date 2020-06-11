@@ -15,6 +15,25 @@ All mount points for the cards are in config.cfg as
 
 of course, you can add more cards.
 
+## How does it work?
+
+- run the device and wait until is ready, then insert the storage - you can plug in a card in USB card adapter or powered USB hub with USB HDD or SSD
+<img src="img/01_ready.jpg" alt="" width="400"/>
+
+- once the storage is connected you have one minute to insert a card for backup
+<img src="img/02_storage_connected.jpg" alt="" width="400"/>
+
+- then, the backup is ready to start
+<img src="img/03_backup_starting.jpg" alt="" width="400"/>
+
+- you can watch the progress during the backup
+<img src="img/04_backup_running.jpg" alt="" width="400"/>
+
+- verification checks that there is no missing file
+<img src="img/05_backup_verified.jpg" alt="" width="400"/>
+
+- you can plug in other cards anytime, during as well as after the backup, if there is something more to backup, the next backup starts
+<img src="img/06_next_backup.jpg" alt="" width="400"/>
 
 <img src="img/little-backup-box.jpg" alt="" width="800"/>
 
