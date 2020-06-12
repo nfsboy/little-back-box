@@ -1,10 +1,10 @@
 # A fork of Little Backup Box
 
-**Do you need to quickly and safely backup cards, usb sticks, disks and other data storages with a really small, portable and inexpensive device? Then you have found what are you looking for.**
+**Do you need to quickly and safely backup cards, USB sticks, disks and other data storages with a really small, portable and inexpensive device? Then you have found what are you looking for.**
 
 A modified version of the original https://github.com/dmpop/little-backup-box project. With the support for more cards and the details of the progress in an OLED screen. The aim of this fork is to backup more SD cards and provide fine details during the backup. 
 
-The backup is verified and in case there is a difference in the source and the target, the backup is displayed as failed.
+The backup is verified and in case of a difference in the source and the target, the backup is displayed as failed.
 
 All mount points for the cards are in config.cfg as
 - CARD_MOUNT_POINT="/media/card" # Mount point of the storage card
@@ -32,7 +32,7 @@ of course, you can add more cards.
 - the verification checks that there is no missing file
 <img src="img/05_backup_verified.jpg" alt="" width="800"/>
 
-- you can plug in other cards anytime, during as well as after the backup, if there is something more to backup, the next backup starts
+- you can plug in other cards anytime, during as well as after the backup. If there is something more to backup, the next backup starts
 <img src="img/06_next_backup.jpg" alt="" width="800"/>
 
 **Tested with OLED Displays:**
