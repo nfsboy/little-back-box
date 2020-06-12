@@ -142,8 +142,8 @@ To add a new feature or fix issues yourself, follow the following steps.
 
 ## Authors
 
-- The multicard extended version Pavel Lukes
-- The original little-backup-box [Dmitri Popov](https://www.tokyomade.photography/) 
+- The multicard extended version - Pavel Lukes
+- The original little-backup-box - [Dmitri Popov](https://www.tokyomade.photography/) 
 
 ## License
 
