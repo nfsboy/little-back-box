@@ -133,7 +133,7 @@ To uninstall Little Backup Box, run the following command:
 
 ## Contribute
 
-If you've found a bug or have a suggestion for improvement, open an issue in the [Issues](https://github.com/dmpop/little-backup-box/issues) section.
+If you've found a bug or have a suggestion for improvement, open an issue in the [Issues](https://github.com/nickelsound/little-backup-box/issues) section.
 
 To add a new feature or fix issues yourself, follow the following steps.
 
@@ -145,22 +145,8 @@ To add a new feature or fix issues yourself, follow the following steps.
 
 ## Author
 
-[Dmitri Popov](https://www.tokyomade.photography/)
-
-### I like coffee
-
-<a href="https://paypal.me/dmpop" target="_blank">Buy me a coffee</a>, and I'll work even harder on Little Backup Box.
-
-<a href="https://paypal.me/dmpop" target="_blank"><img
-src="https://i.imgur.com/cERczks.png" alt="Buy Me A Coffee" width="128"></a>
-
-## Little Backup Book
-
-The [Little Backup Book](https://gumroad.com/l/little-backup-book) book provides step-by-step instructions on building, configuring, using, and troubleshooting a Raspberry Pi-based photo backup device running Little Backup Box. Get your copy on [Google Play Store](https://play.google.com/store/books/details?id=VvrHDwAAQBAJ) or [Gumroad](https://gumroad.com/l/little-backup-book).
-
-<img src="https://i.imgur.com/O31FnrF.jpg" width="200"/>
-
-By buying the book, you are supporting the Linux Backup Box project.
+The multicard extended version Pavel Lukes
+The original little-backup-box [Dmitri Popov](https://www.tokyomade.photography/) 
 
 ## License
 
