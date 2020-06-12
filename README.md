@@ -143,7 +143,7 @@ To add a new feature or fix issues yourself, follow the following steps.
 4. Push changes using the `git push origin new-feature` command
 5. Submit a pull request
 
-## Author
+## Authors
 
 - The multicard extended version Pavel Lukes
 - The original little-backup-box [Dmitri Popov](https://www.tokyomade.photography/) 
