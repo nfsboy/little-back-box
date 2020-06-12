@@ -43,10 +43,7 @@ of course, you can add more cards.
 
 A collection of scripts that transform a Raspberry Pi (or any single-board computer running a Debian-based Linux distribution) into an inexpensive, fully-automatic, pocketable photo backup device.
 
-<img src="https://i.imgur.com/zwQ1ISP.jpg" alt="" width="800"/>
-
-**IMPORTANT**
-Little Backup Box is designed to work with USB sticks as backup media. Theoretically, it's possible to make Little Backup Box work with an external hard disk, but this setup is not officially supported.
+<img src="https://i.imgur.com/53hS3gz.jpg" alt="" width="800"/>
 
 ## Little Backup Box features
 
@@ -55,7 +52,7 @@ Little Backup Box is designed to work with USB sticks as backup media. Theoretic
 - Use multiple cards. Little Backup Box assigns a unique ID to each card and create a separate folder for each card on the backup storage device.
 - Perform card backup fully automatically with no user interaction.
 - Start specific backup operations manually using Little Backup Box's web UI.
-- Browse and view the backed up files using the integrated web-based file viewer.
+- Automatically generate a minimalist responsive gallery from the backed up RAW files.
 - Stream the backed up photos to any DLNA-compatible client.
 - Access the backed up content from other machines on the network.
 - Push backed up contents to a cloud storage service.
@@ -86,7 +83,7 @@ The exact steps depend on the backup mode.
 
 The remote control mode is enabled by default. This mode allows you to control and manage Little Backup Box via a web UI. 
 
-1. Point the browser to *http://127.0.0.1* (replace *127.0.0.1* with the actual IP address of the Raspberry Pi).
+1. Point the browser to *http://127.0.0.1:8000* (replace *127.0.0.1* with the actual IP address of the Raspberry Pi).
 2. Start the desired action by pressing the appropriate button.
 
 <img src="img/rc.png" alt="Remote control interface" />

@@ -23,7 +23,7 @@ sudo apt full-upgrade -y
 sudo apt update
 
 # Install the required packages
-sudo apt install -y acl git-core screen rsync exfat-fuse exfat-utils ntfs-3g gphoto2 libimage-exiftool-perl dialog php-cli minidlna samba samba-common-bin
+sudo apt install -y acl git-core screen rsync exfat-fuse exfat-utils ntfs-3g gphoto2 libimage-exiftool-perl dialog php-cli minidlna samba samba-common-bin vsftpd imagemagick
 
 # Remove obsolete packages
 sudo apt autoremove -y
@@ -84,7 +84,7 @@ case $CHOICE in
             ;;
 esac
 
-crontab -l | { cat; echo "@reboot cd /home/"$USER"/little-backup-box/scripts && sudo php -S 0.0.0.0:80"; } | crontab
+crontab -l | { cat; echo "@reboot cd /home/"$USER"/little-backup-box/scripts && sudo php -S 0.0.0.0:8000"; } | crontab
 crontab -l | { cat; echo "@reboot sudo /home/"$USER"/little-backup-box/scripts/restart-servers.sh"; } | crontab
 crontab -l | { cat; echo "*/3 * * * * sudo /home/"$USER"/little-backup-box/scripts/ip.sh"; } | crontab
 
@@ -135,6 +135,10 @@ sudo sh -c "echo 'create mask = 0777' >> /etc/samba/smb.conf"
 sudo sh -c "echo 'directory mask = 0777' >> /etc/samba/smb.conf"
 sudo samba restart
 cd
+
+# Configure vsftpd
+sudo sh -c "echo 'write_enable=YES' >> /etc/vsftpd.conf"
+sudo service vsftpd restart
 
 # Enable OLED screen support
 dialog --clear \
