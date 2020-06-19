@@ -61,7 +61,7 @@ A collection of scripts that transform a Raspberry Pi (or any single-board compu
 
 1. Create a bootable SD card with the latest version of Raspbian Lite for use with Little Backup Box.
 2. Make sure that your Raspberry Pi is connected to the internet.
-3. Run the following command on the Raspberry Pi: `curl -sSL https://is.gd/pl_lbb | bash`
+3. Run the following command on the Raspberry Pi: `curl -sSL https://is.gd/nc_lbb | bash`
 
 Little Backup Box supports three backup modes:
 
@@ -126,7 +126,7 @@ Please report bugs and issues in the [Issues](https://github.com/dmpop/little-ba
 
 To uninstall Little Backup Box, run the following command:
 
-    curl -sSL https://is.gd/pl_ulbb | bash
+    curl -sSL https://is.gd/nc_ulbb | bash
 
 ## Contribute
 
