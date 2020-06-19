@@ -44,6 +44,10 @@ done
 # When the USB storage device is detected, mount it
 mount /dev/"$STORAGE_DEV" "$STORAGE_MOUNT_POINT"
 
+# Checker for storage disconnection
+"${CONFIG_DIR}/card-backup-background-check.sh" &
+
+
 # in case that the card is not connected and the disk is just waiting is better to end the process and shutdown rpi
 sudo shutdown -h $SHUTD "Shutdown is activated. To cancel: sudo shutdown -c"
 
