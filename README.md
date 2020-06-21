@@ -17,6 +17,8 @@ of course, you can add more cards.
 
 ## How does it work?
 
+[![LITTLE BACKUP BOX](img/yt.jpg)](https://youtu.be/3zE3hJ1npA8)
+
 - run the device and wait until it is ready, then insert the storage - you can plug in a card in a USB card reader or a powered USB hub with USB HDD or SSD
 <img src="img/01_ready.jpg" alt="" width="800"/>
 
