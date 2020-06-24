@@ -29,7 +29,7 @@ of course, you can add more cards.
 - once the storage is connected you have one minute to insert a card for backup
 <img src="img/02_storage_connected.jpg" alt="" width="800"/>
 
-- then, the backup is ready to start
+- then, the backup is about to start
 <img src="img/03_backup_starting.jpg" alt="" width="800"/>
 
 - you can watch the progress during the backup
