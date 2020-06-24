@@ -20,7 +20,7 @@ of course, you can add more cards.
 ### Backing up a card
 [![LITTLE BACKUP BOX](img/yt.jpg)](https://youtu.be/3zE3hJ1npA8)
 
-### Backing up more cards to a external SSD
+### Backing up more cards to an external SSD
 [<img src="img/yt2.jpg" alt="" width="800"/>](https://youtu.be/QE2FMxymx5M)
 
 - run the device and wait until it is ready, then insert the storage - you can plug in a card in a USB card reader or a powered USB hub with USB HDD or SSD
