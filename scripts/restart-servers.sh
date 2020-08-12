@@ -23,8 +23,7 @@ source "$CONFIG"
 
 # Wait for a USB storage device (e.g., a USB flash drive)
 STORAGE=$(ls /dev/* | grep "$STORAGE_DEV" | cut -d"/" -f3)
-while [ -z "${STORAGE}" ]
-  do
+while [ -z "${STORAGE}" ]; do
   sleep 1
   STORAGE=$(ls /dev/* | grep "$STORAGE_DEV" | cut -d"/" -f3)
 done

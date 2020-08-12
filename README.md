@@ -77,7 +77,7 @@ Little Backup Box supports three backup modes:
 
 During the installation, choose the desired mode from the selection dialog.
 
-<img src="img/installer.png" alt="" width="800"/>
+<img src="img/installer.png" alt="" width="600"/>
 
 When prompted, reboot the Raspberry Pi.
 
@@ -94,9 +94,9 @@ The remote control mode is enabled by default. This mode allows you to control a
 
 <img src="img/rc.png" alt="Remote control interface" />
 
-- Click the **Speedometer** icon to access basic system information, such as a list of storage devices and memory usage.
-- To view JPEG files on the backup storage device, click the  **Image** icon.
-- To edit the configuration file, click the **Hamburger** icon.
+- Press the **SYSTEM INFO** icon to access basic system information, such as a list of storage devices and memory usage.
+- To view JPEG files on the backup storage device, click the  **RAW VIEWER** icon.
+- To edit the configuration file, click the **SETTINGS** icon.
 
 ### Card backup mode
 
@@ -111,16 +111,16 @@ The remote control mode is enabled by default. This mode allows you to control a
 
 ### Camera backup mode
 
-1. Boot the Raspberry Pi
-2. Connect the camera to the Raspberry Pi
-3. Turn the camera on
-4. Wait till the Raspberry Pi shuts down
+1. Boot the Raspberry Pi.
+2. Connect the camera to the Raspberry Pi.
+3. Turn the camera on.
+4. Wait till the Raspberry Pi shuts down.
 
 ### Internal backup mode
 
-1. Boot the Raspberry Pi
-2. Insert a storage card into a card reader and plug it into the Raspberry Pi
-3. Wait till the Raspberry Pi shuts down
+1. Boot the Raspberry Pi.
+2. Insert a storage card into a card reader and plug it into the Raspberry Pi.
+3. Wait till the Raspberry Pi shuts down.
 
 ## Problems, comments, ideas, updates?
 
