@@ -24,12 +24,10 @@ source "$CONFIG"
 # Set the ACT LED to heartbeat
 sudo sh -c "echo heartbeat > /sys/class/leds/led0/trigger"
 
-# Shutdown after a specified period of time (in minutes) if no device is connected.
-sudo shutdown -h $SHUTD "Shutdown is activated. To cancel: sudo shutdown -c"
-# If display support is enabled, notify that shutdown is activated
+# If display support is enabled, display the "Ready. Connect camera" message
 if [ $DISP = true ]; then
     oled r
-    oled +b "Shutdown active"
+    oled +b "Ready"
     oled +c "Connect camera"
     sudo oled s
 fi
@@ -40,9 +38,6 @@ while [ -z "${DEVICE}" ]; do
     sleep 1
     DEVICE=$(gphoto2 --auto-detect | grep usb | cut -b 36-42 | sed 's/,/\//')
 done
-
-# Cancel shutdown
-sudo shutdown -c
 
 # If display support is enabled, notify that the camera is detected
 if [ $DISP = true ]; then
@@ -67,11 +62,22 @@ gphoto2 --get-all-files --skip-existing
 if [ $DISP = true ]; then
     oled r
     oled +b "Backup complete"
-    oled +c "Shutdown"
+    oled +c "Power off"
     sudo oled s
 fi
-# Shutdown
-if [ $DISP = true ]; then
-    oled r
+
+# Check internet connection and send
+# a notification if the NOTIFY option is enabled
+check=$(wget -q --spider http://google.com/)
+if [ $NOTIFY = true ] || [ ! -z "$check" ]; then
+    curl --url 'smtps://'$SMTP_SERVER':'$SMTP_PORT --ssl-reqd \
+        --mail-from $MAIL_USER \
+        --mail-rcpt $MAIL_TO \
+        --user $MAIL_USER':'$MAIL_PASSWORD \
+        -T <(echo -e 'From: '$MAIL_USER'\nTo: '$MAIL_TO'\nSubject: Little Backup Box\n\nBackup complete.')
 fi
-shutdown -h now
+
+# Power off
+if [ $POWER_OFF = true ]; then
+    poweroff
+fi

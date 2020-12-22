@@ -35,6 +35,15 @@ fi
 
 # Wait for a USB storage device (e.g., a USB flash drive)
 STORAGE=$(ls /dev/* | grep "$STORAGE_DEV" | cut -d"/" -f3)
+
+#check if storage mount point is empty
+if [ "$(ls -A $STORAGE_MOUNT_POINT)" ]; then
+    mv "$STORAGE_MOUNT_POINT" "$STORAGE_MOUNT_POINT"-`date +%Y.%m.%d.%H.%M.%S`
+    mkdir "$STORAGE_MOUNT_POINT"
+fi
+
+
+
 while [ -z "${STORAGE}" ]; do
     sleep 1
     STORAGE=$(ls /dev/* | grep "$STORAGE_DEV" | cut -d"/" -f3)

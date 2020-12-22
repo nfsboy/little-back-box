@@ -23,7 +23,7 @@ sudo apt full-upgrade -y
 sudo apt update
 
 # Install the required packages
-sudo apt install -y acl git-core screen rsync exfat-fuse exfat-utils ntfs-3g gphoto2 libimage-exiftool-perl dialog php-cli minidlna samba samba-common-bin vsftpd imagemagick
+sudo apt install -y acl git-core screen rsync exfat-fuse exfat-utils ntfs-3g gphoto2 libimage-exiftool-perl dialog php-cli minidlna samba samba-common-bin vsftpd imagemagick curl
 
 # Remove obsolete packages
 sudo apt autoremove -y
@@ -76,38 +76,59 @@ case $CHOICE in
 1)
     crontab -l | {
         cat
-        echo "@reboot sudo /home/"$USER"/little-backup-box/scripts/card-backup.sh >> /home/"$USER"/little-backup-box.log 2>&1"
+        echo "@reboot sudo /home/"$USER"/little-backup-box/scripts/card-backup.sh"
     } | crontab
     ;;
 2)
     crontab -l | {
         cat
-        echo "@reboot sudo /home/"$USER"/little-backup-box/scripts/camera-backup.sh >> /home/"$USER"/little-backup-box.log 2>&1"
+        echo "@reboot sudo /home/"$USER"/little-backup-box/scripts/camera-backup.sh >> /home/"$USER"/"
     } | crontab
     ;;
 3)
     crontab -l | {
         cat
-        echo "@reboot sudo /home/"$USER"/little-backup-box/scripts/internal-backup.sh >> /home/"$USER"/little-backup-box.log 2>&1"
+        echo "@reboot sudo /home/"$USER"/little-backup-box/scripts/internal-backup.sh >> /home/"$USER"/"
     } | crontab
     ;;
 esac
 
 crontab -l | {
     cat
-    echo "@reboot cd /home/"$USER"/little-backup-box/scripts && sudo php -S 0.0.0.0:8000"
-} | crontab
-crontab -l | {
-    cat
     echo "@reboot sudo /home/"$USER"/little-backup-box/scripts/restart-servers.sh"
 } | crontab
 crontab -l | {
     cat
-    echo "*/3 * * * * /home/"$USER"/little-backup-box/scripts/ip.sh"
+    echo "@reboot /home/"$USER"/little-backup-box/scripts/ip.sh"
 } | crontab
 
+# Create web UI systemd unit
+sudo sh -c "echo '[Unit]' > /etc/systemd/system/webui.service"
+sudo sh -c "echo 'Description=web UI' >> /etc/systemd/system/webui.service"
+sudo sh -c "echo '[Service]' >> /etc/systemd/system/webui.service"
+sudo sh -c "echo 'Restart=always' >> /etc/systemd/system/webui.service"
+sudo sh -c "echo 'ExecStart=/usr/bin/php -S 0.0.0.0:8000 -t /home/"$USER"/little-backup-box/scripts' >> /etc/systemd/system/webui.service"
+sudo sh -c "echo 'ExecStop=/usr/bin/kill -HUP \$MAINPID' >> /etc/systemd/system/webui.service"
+sudo sh -c "echo '[Install]' >> /etc/systemd/system/webui.service"
+sudo sh -c "echo 'WantedBy=multi-user.target' >> /etc/systemd/system/webui.service"
+sudo systemctl enable webui.service
+sudo systemctl start webui.service
+
+# Create File Browser systemd unit
+curl -fsSL https://filebrowser.org/get.sh | bash
+sudo sh -c "echo '[Unit]' > /etc/systemd/system/filebrowser.service"
+sudo sh -c "echo 'Description=File Browser' >> /etc/systemd/system/filebrowser.service"
+sudo sh -c "echo '[Service]' >> /etc/systemd/system/filebrowser.service"
+sudo sh -c "echo 'Restart=always' >> /etc/systemd/system/filebrowser.service"
+sudo sh -c "echo 'ExecStart=/usr/local/bin/filebrowser -a 0.0.0.0 -r /home/"$USER"/little-backup-box/scripts' >> /etc/systemd/system/filebrowser.service"
+sudo sh -c "echo 'ExecStop=/usr/bin/kill -HUP \$MAINPID' >> /etc/systemd/system/filebrowser.service"
+sudo sh -c "echo '[Install]' >> /etc/systemd/system/filebrowser.service"
+sudo sh -c "echo 'WantedBy=multi-user.target' >> /etc/systemd/system/filebrowser.service"
+sudo systemctl enable filebrowser.service
+sudo systemctl start filebrowser.service
+
 # Configure Samba
-sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.orig
+sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.orig-$(date +%Y%m%d%H%M)
 pw="raspberry"
 (
     echo $pw

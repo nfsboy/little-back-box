@@ -124,6 +124,7 @@ fi
 
 # Finish
 storsize=$(df /dev/"$STORAGE_DEV"  -h --output=size | sed '1d' | tr -d ' ')
+storfree=$(df /dev/"$STORAGE_DEV"  -h --output=avail | sed '1d' | tr -d ' ')
 
 sync
 umount /dev/"$STORAGE_DEV"
@@ -137,6 +138,7 @@ if [ $DISP = true ]; then
     oled +a "Backup $iteration"
     oled +b "Backup $STATUS"
     oled +c "Storage: $storsize"
+    oled +d "Free: $storfree"
     if [ $SHUTD_AFTER_BACKUP = true ]; then
 	oled +d "Shutdown in ${SHUTD}m"
     fi

@@ -22,9 +22,16 @@ CONFIG="${CONFIG_DIR}/config.cfg"
 source "$CONFIG"
 
 ping -c1 google.com &>/dev/null
+while [ $? != 0 ]; do
+    sleep 10
+    ping -c1 google.com &>/dev/null
+done
 
-if [ $? -eq 0 ]; then
+if [ ! -z $SMTP_SERVER ]; then
     IP=$(hostname -I | cut -d' ' -f1)
-    echo "$IP"
-    curl -d ip="$IP" -G "$IP_URL"
+    curl --url 'smtps://'$SMTP_SERVER':'$SMTP_PORT --ssl-reqd \
+        --mail-from $MAIL_USER \
+        --mail-rcpt $MAIL_TO \
+        --user $MAIL_USER':'$MAIL_PASSWORD \
+        -T <(echo -e 'From: '$MAIL_USER'\nTo: '$MAIL_TO'\nSubject: Little Backup Box\n\n'$IP'\n')
 fi
